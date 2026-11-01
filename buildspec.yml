@@ -1,22 +1,19 @@
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      python: 3.12
   pre_build:
     commands:
       - echo Installing dependencies...
-      - python3.12 -m pip install -r requirements.txt
-      - python3.12 -m pip install pytest pytest-cov
+      - PYENV_VERSION=3.12.15 python -m pip install -r requirements.txt
+      - PYENV_VERSION=3.12.15 python -m pip install pytest pytest-cov
   build:
     commands:
       - echo Running tests...
       - export PYTHONPATH=.
-      - python3.12 -m pytest tests/ --cov=app
+      - PYENV_VERSION=3.12.15 python -m pytest tests/ --cov=app
       - echo Building the application...
-      - python3.12 -m pip install wheel
-      - python3.12 setup.py bdist_wheel
+      - PYENV_VERSION=3.12.15 python -m pip install wheel
+      - PYENV_VERSION=3.12.15 python setup.py bdist_wheel
   post_build:
     commands:
       - echo Build completed on `date`
