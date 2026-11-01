@@ -10,13 +10,19 @@ phases:
     commands:
       - echo Running tests...
       - export PYTHONPATH=.
-      - PYENV_VERSION=3.12.15 python -m pytest tests/ --cov=app
+      - PYENV_VERSION=3.12.15 python -m pytest tests/ --cov=app --cov-report=xml:coverage.xml
       - echo Building the application...
       - PYENV_VERSION=3.12.15 python -m pip install wheel
       - PYENV_VERSION=3.12.15 python setup.py bdist_wheel
   post_build:
     commands:
       - echo Build completed on `date`
+
+reports:
+  coverage:
+    files:
+      - coverage.xml
+    file-format: COBERTURAXML
 
 artifacts:
   files:
